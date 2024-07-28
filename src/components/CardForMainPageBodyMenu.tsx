@@ -1,8 +1,8 @@
 // src/components/CardForMainPageBodyMenu.tsx
-
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
 interface CardForMainPageBodyMenuProps {
@@ -10,22 +10,23 @@ interface CardForMainPageBodyMenuProps {
     title: string;
     description: string[];
     bgColor: string;
+    link: string;
 }
 
-const CardForMainPageBodyMenu: React.FC<CardForMainPageBodyMenuProps> = ({ id, title, description, bgColor }) => {
+const CardForMainPageBodyMenu: React.FC<CardForMainPageBodyMenuProps> = ({ id, title, description, bgColor, link }) => {
     return (
-        <section id={id} className="py-12 w-full md:w-1/3 px-4">
-            <Card className={`rounded-lg shadow-md ${bgColor} text-white`}>
+        <Link href={link} className="block">
+            <Card className={`rounded-lg shadow-md ${bgColor} text-white h-64 transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-xl cursor-pointer`}>
                 <CardHeader>
-                    <h2 className="text-3xl font-bold mb-6">{title}</h2>
+                    <h2 className="text-2xl font-bold">{title}</h2>
                 </CardHeader>
                 <CardContent>
                     {description.map((desc, index) => (
-                        <p key={index} className="text-lg mb-2">{desc}</p>
+                        <p key={index} className="text-base mb-2">{desc}</p>
                     ))}
                 </CardContent>
             </Card>
-        </section>
+        </Link>
     );
 };
 

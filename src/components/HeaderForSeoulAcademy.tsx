@@ -1,17 +1,17 @@
-// src/components/HeaderForSeoulAcademy.tsx
-
+// src/components/Header/HeaderForSeoulAcademy.tsx
 "use client";
 
 import React from 'react';
 import Link from 'next/link';
+import CommonButton from '@/components/Common/CommonButton';
 
 const HeaderForSeoulAcademy: React.FC = () => {
     return (
         <header className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-6 shadow-md">
             <div className="container mx-auto flex justify-between items-center px-4">
                 <h1 className="text-4xl font-bold">Seoul Academy</h1>
-                <nav>
-                    <ul className="flex space-x-6">
+                <nav className="flex-grow mx-10">
+                    <ul className="flex justify-center space-x-6">
                         <li>
                             <Link href="/schedule" className="hover:underline">스케쥴러</Link>
                         </li>
@@ -23,6 +23,23 @@ const HeaderForSeoulAcademy: React.FC = () => {
                         </li>
                     </ul>
                 </nav>
+                <div className="flex space-x-4">
+                    <CommonButton
+                        variant="outline"
+                        size="sm"
+                        className="bg-white text-indigo-600 hover:bg-indigo-100 border-white"
+                    >
+                        로그인
+                    </CommonButton>
+                    <CommonButton
+                        variant="default"
+                        size="sm"
+                        className="bg-indigo-500 text-white hover:bg-indigo-400"
+                    >
+                        회원가입
+                    </CommonButton>
+
+                </div>
             </div>
         </header>
     );
