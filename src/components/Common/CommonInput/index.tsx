@@ -1,31 +1,39 @@
-import React, { InputHTMLAttributes } from 'react';
+// src/components/Common/CommonInput.tsx
+import React, { forwardRef, InputHTMLAttributes } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 interface CommonInputProps extends InputHTMLAttributes<HTMLInputElement> {
-    error?: string | string[];
+    error?: string;
 }
 
-const CommonInput: React.FC<CommonInputProps> = ({ error, ...props }) => {
-    const errorMessage = Array.isArray(error) ? error[0] : error;
+const CommonInput = forwardRef<HTMLInputElement, CommonInputProps>(
+    ({ error, className, ...props }, ref) => {
+        return (
+            <div className="flex flex-col gap-2">
+                <input
+                    ref={ref}
+                    className={twMerge(
+                        "w-full h-10 rounded-md px-3",
+                        "bg-white border border-neutral-300",
+                        "focus:outline-none focus:border-blue-500",
+                        "focus:ring-2 focus:ring-blue-500",
+                        "placeholder:text-neutral-400",
+                        error && "border-red-500",
+                        className
+                    )}
+                    aria-invalid={error ? 'true' : 'false'}
+                    {...props}
+                />
+                {error && (
+                    <span className="text-red-500 text-sm" role="alert">
+                        {error}
+                    </span>
+                )}
+            </div>
+        );
+    }
+);
 
-    return (
-        <div className="flex flex-col gap-2">
-            <input
-                className="
-                    w-full h-10 rounded-md pl-3
-                    bg-white border border-neutral-300
-                    focus:outline-none focus:border-orange-500
-                    focus:ring-2 focus:ring-orange-500
-                    placeholder:text-neutral-400
-                "
-                {...props}
-            />
-            {errorMessage && (
-                <span className="text-red-500 font-medium">
-                    {errorMessage}
-                </span>
-            )}
-        </div>
-    );
-};
+CommonInput.displayName = 'CommonInput';
 
 export default CommonInput;

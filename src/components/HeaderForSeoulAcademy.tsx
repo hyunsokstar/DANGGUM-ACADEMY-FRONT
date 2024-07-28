@@ -1,6 +1,3 @@
-// src/components/Header/HeaderForSeoulAcademy.tsx
-"use client";
-
 import React from 'react';
 import Link from 'next/link';
 import CommonButton from '@/components/Common/CommonButton';
@@ -24,21 +21,24 @@ const HeaderForSeoulAcademy: React.FC = () => {
                     </ul>
                 </nav>
                 <div className="flex space-x-4">
-                    <CommonButton
-                        variant="outline"
-                        size="sm"
-                        className="bg-white text-indigo-600 hover:bg-indigo-100 border-white"
-                    >
-                        로그인
-                    </CommonButton>
-                    <CommonButton
-                        variant="default"
-                        size="sm"
-                        className="bg-indigo-500 text-white hover:bg-indigo-400"
-                    >
-                        회원가입
-                    </CommonButton>
-
+                    <Link href="/login-page" passHref>
+                        <CommonButton
+                            variant="primary"
+                            size="sm"
+                            className="bg-white text-indigo-600 hover:bg-indigo-100 border-white"
+                        >
+                            로그인
+                        </CommonButton>
+                    </Link>
+                    <Link href="/signup-page" passHref>
+                        <CommonButton
+                            variant="success"
+                            size="sm"
+                            className="bg-indigo-500 text-white hover:bg-indigo-400"
+                        >
+                            회원가입
+                        </CommonButton>
+                    </Link>
                 </div>
             </div>
         </header>

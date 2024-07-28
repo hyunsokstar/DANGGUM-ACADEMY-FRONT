@@ -13,7 +13,7 @@ function SubmitButton() {
     return (
         <CommonButton
             type="submit"
-            variant="green"
+            variant="primary"
             className="flex-1"
             loading={pending}
         >
@@ -68,7 +68,7 @@ export default function CreateAccount() {
                     <SubmitButton />
                     <CommonButton
                         type="button"
-                        variant="outline"
+                        variant="primary"
                         className="flex-1"
                     >
                         Cancel
