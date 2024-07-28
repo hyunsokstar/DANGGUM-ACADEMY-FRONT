@@ -5,7 +5,9 @@ type Props = {}
 
 const Schedule = (props: Props) => {
     return (
-        <div>타임 테이블 출력</div>
+        <div>
+            스케쥴 페이지
+        </div>
     )
 }
 

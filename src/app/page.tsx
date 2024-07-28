@@ -12,7 +12,7 @@ const HomePage = () => {
       title: "스케쥴러",
       description: ["학생들과 선생님의 일정을 관리합니다."],
       bgColor: "bg-blue-400",
-      link: "/schedule"
+      link: "/schedule-page"
     },
     {
       id: "question-bank",
@@ -67,39 +67,6 @@ const HomePage = () => {
           ))}
         </div>
 
-        <div className="space-y-8">
-          <div>
-            <h2 className="text-2xl font-bold mb-4">버튼 스타일</h2>
-            <div className="flex flex-wrap gap-4">
-              <CommonButton variant="default">기본 버튼</CommonButton>
-              <CommonButton variant="outline">아웃라인 버튼</CommonButton>
-              <CommonButton variant="red">빨간색 버튼</CommonButton>
-              <CommonButton variant="green">초록색 버튼</CommonButton>
-              <CommonButton variant="yellow">노란색 버튼</CommonButton>
-              <CommonButton variant="purple">보라색 버튼</CommonButton>
-            </div>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-bold mb-4">버튼 크기</h2>
-            <div className="flex flex-wrap gap-4 items-end">
-              <CommonButton variant="default" size="sm">작은 버튼</CommonButton>
-              <CommonButton variant="default" size="md">중간 버튼</CommonButton>
-              <CommonButton variant="default" size="lg">큰 버튼</CommonButton>
-            </div>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-bold mb-4">아웃라인 버튼 색상</h2>
-            <div className="flex flex-wrap gap-4">
-              <CommonButton variant="outline">파란색 아웃라인</CommonButton>
-              <CommonButton variant="outline" className="border-red-500 text-red-500 hover:bg-red-50">빨간색 아웃라인</CommonButton>
-              <CommonButton variant="outline" className="border-green-500 text-green-500 hover:bg-green-50">초록색 아웃라인</CommonButton>
-              <CommonButton variant="outline" className="border-yellow-500 text-yellow-500 hover:bg-yellow-50">노란색 아웃라인</CommonButton>
-              <CommonButton variant="outline" className="border-purple-500 text-purple-500 hover:bg-purple-50">보라색 아웃라인</CommonButton>
-            </div>
-          </div>
-        </div>
       </main>
       <footer className="bg-gray-800 text-white py-6">
         <div className="container mx-auto text-center">
