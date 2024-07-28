@@ -1,10 +1,11 @@
-// src/components/Common/CommonButton.tsx
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
+import { ArrowPathIcon } from '@heroicons/react/24/solid';
 
 export interface CommonButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'default' | 'outline' | 'red' | 'green' | 'yellow' | 'purple';
     size?: 'sm' | 'md' | 'lg';
+    loading?: boolean;
 }
 
 const variantClasses = {
@@ -27,9 +28,11 @@ const CommonButton: React.FC<CommonButtonProps> = ({
     className,
     variant = 'default',
     size = 'md',
+    loading = false,
+    disabled,
     ...props
 }) => {
-    const baseClasses = 'font-medium rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500';
+    const baseClasses = 'font-medium rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 flex items-center justify-center';
 
     return (
         <button
@@ -37,11 +40,18 @@ const CommonButton: React.FC<CommonButtonProps> = ({
                 baseClasses,
                 variantClasses[variant],
                 sizeClasses[size],
+                (loading || disabled) && 'opacity-50 cursor-not-allowed',
                 className
             )}
+            disabled={loading || disabled}
             {...props}
         >
-            {children}
+            {loading ? (
+                <>
+                    <ArrowPathIcon className="w-5 h-5 mr-2 animate-spin" />
+                    로딩중...
+                </>
+            ) : children}
         </button>
     );
 };
