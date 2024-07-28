@@ -1,11 +1,12 @@
-// components/ui/CommonInput.tsx
 import React, { InputHTMLAttributes } from 'react';
 
 interface CommonInputProps extends InputHTMLAttributes<HTMLInputElement> {
-    error?: string;
+    error?: string | string[];
 }
 
 const CommonInput: React.FC<CommonInputProps> = ({ error, ...props }) => {
+    const errorMessage = Array.isArray(error) ? error[0] : error;
+
     return (
         <div className="flex flex-col gap-2">
             <input
@@ -18,9 +19,9 @@ const CommonInput: React.FC<CommonInputProps> = ({ error, ...props }) => {
                 "
                 {...props}
             />
-            {error && (
+            {errorMessage && (
                 <span className="text-red-500 font-medium">
-                    {error}
+                    {errorMessage}
                 </span>
             )}
         </div>
