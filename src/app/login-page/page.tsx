@@ -1,11 +1,11 @@
-// src/app/login-page/page.tsx
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import CommonInput from '@/components/Common/CommonInput';
 import CommonButton from '@/components/Common/CommonButton';
 import Link from 'next/link';
 import { useFormState } from 'react-dom';
-
+import { handleLogin } from './action';
 
 function SubmitButton() {
     return (
@@ -20,11 +20,20 @@ function SubmitButton() {
 }
 
 export default function LoginPage() {
+    const router = useRouter();
+    const [state, formAction] = useFormState(handleLogin, null);
+
+    useEffect(() => {
+        if (state?.success) {
+            // 로그인 성공 시 홈페이지로 리다이렉트
+            router.push('/');
+        }
+    }, [state, router]);
 
     return (
         <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
             <h1 className="text-2xl font-bold mb-6 text-center">로그인</h1>
-            <form className="space-y-4">
+            <form action={formAction} className="space-y-4">
                 <CommonInput
                     name="email"
                     type="email"
@@ -39,6 +48,12 @@ export default function LoginPage() {
                     required
                     aria-label="비밀번호"
                 />
+
+                {state?.message && (
+                    <p className={`text-sm ${state.success ? 'text-green-600' : 'text-red-600'}`}>
+                        {state.message}
+                    </p>
+                )}
 
                 <div className="pt-4">
                     <SubmitButton />
