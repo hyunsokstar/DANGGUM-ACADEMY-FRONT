@@ -38,7 +38,7 @@ const MenuItemComponent: React.FC<{ item: MenuItemType }> = ({ item }) => {
                 <DropdownMenuContent className="bg-white text-purple-800 rounded-md shadow-lg">
                     {item.items.map((subItem) => (
                         <DropdownMenuItem key={subItem.key}>
-                            <Link href={`/${subItem.key}`} className="block px-4 py-2 hover:bg-purple-100 w-full text-left">
+                            <Link href={`/${item.key}/${subItem.key}`} className="block px-4 py-2 hover:bg-purple-100 w-full text-left">
                                 {subItem.name}
                             </Link>
                         </DropdownMenuItem>
