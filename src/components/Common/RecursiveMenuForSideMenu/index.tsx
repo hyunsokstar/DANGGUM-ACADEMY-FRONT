@@ -1,43 +1,41 @@
-// // components/RecursiveMenu.tsx
+import React from 'react';
+import Link from 'next/link';
+import { MenuItemType } from '@/constants/menu.type';
 
-// import { MenuItemType } from '@/constants/menu.type';
-// import React from 'react';
-
-// interface RecursiveMenuForSideMenuProps {
-//     items: MenuItemType[];
-//     level?: number; // 들여쓰기 수준을 위한 level 추가
-//     backgroundColor?: string; // 배경색을 위한 속성 추가
-// }
-
-// const RecursiveMenuForSideMenu: React.FC<RecursiveMenuForSideMenuProps> = ({ items, level = 0, backgroundColor = '#ffffff' }) => {
-//     return (
-//         <ul style={{ paddingLeft: `${level * 20}px`, backgroundColor: backgroundColor }}> {/* 들여쓰기 및 배경색 적용 */}
-//             {items.map((item) => (
-//                 <li key={item.key}>
-//                     {item.url ? (
-//                         <a href={item.url} className={item.children ? 'font-bold' : ''}>{item.name}</a>
-//                     ) : (
-//                         <span className={item.children ? 'font-bold' : ''}>{item.name}</span>
-//                     )}
-//                     {item.children && item.children.length > 0 && (
-//                         <RecursiveMenuForSideMenu items={item.children} level={level + 1} backgroundColor={backgroundColor} />
-//                     )}
-//                 </li>
-//             ))}
-//         </ul>
-//     );
-// };
-
-// export default RecursiveMenuForSideMenu;
-
-import React from 'react'
-
-type Props = {}
-
-const index = (props: Props) => {
-    return (
-        <div>index</div>
-    )
+interface RecursiveMenuForSideMenuProps {
+    items: MenuItemType[];
+    level?: number;
+    parentKey?: string;
 }
 
-export default index
+const RecursiveMenuForSideMenu: React.FC<RecursiveMenuForSideMenuProps> = ({ items, level = 0, parentKey = '' }) => {
+    return (
+        <ul className="space-y-2">
+            {items.map((item) => (
+                <li key={item.key} style={{ paddingLeft: `${level * 16}px` }}>
+                    {item.items ? (
+                        <div>
+                            <span className="font-semibold text-gray-700 hover:text-purple-600 cursor-pointer">
+                                {item.name}
+                            </span>
+                            <RecursiveMenuForSideMenu
+                                items={item.items}
+                                level={level + 1}
+                                parentKey={item.key}
+                            />
+                        </div>
+                    ) : (
+                        <Link
+                            href={parentKey ? `/${parentKey}/${item.key}` : `/${item.key}`}
+                            className="text-gray-600 hover:text-purple-600"
+                        >
+                            {item.name}
+                        </Link>
+                    )}
+                </li>
+            ))}
+        </ul>
+    );
+};
+
+export default RecursiveMenuForSideMenu;
