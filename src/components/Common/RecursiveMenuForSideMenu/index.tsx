@@ -5,10 +5,10 @@ import { MenuItemType } from '@/constants/menu.type';
 interface RecursiveMenuForSideMenuProps {
     items: MenuItemType[];
     level?: number;
-    parentKey?: string;
+    parentKeys?: string[];
 }
 
-const RecursiveMenuForSideMenu: React.FC<RecursiveMenuForSideMenuProps> = ({ items, level = 0, parentKey = '' }) => {
+const RecursiveMenuForSideMenu: React.FC<RecursiveMenuForSideMenuProps> = ({ items, level = 0, parentKeys = [] }) => {
     return (
         <ul className="space-y-2">
             {items.map((item) => (
@@ -21,12 +21,12 @@ const RecursiveMenuForSideMenu: React.FC<RecursiveMenuForSideMenuProps> = ({ ite
                             <RecursiveMenuForSideMenu
                                 items={item.items}
                                 level={level + 1}
-                                parentKey={item.key}
+                                parentKeys={[...parentKeys, item.key]}
                             />
                         </div>
                     ) : (
                         <Link
-                            href={parentKey ? `/${parentKey}/${item.key}` : `/${item.key}`}
+                            href={`/${[...parentKeys, item.key].join('/')}`}
                             className="text-gray-600 hover:text-purple-600"
                         >
                             {item.name}
